@@ -1,0 +1,12 @@
+.navbar {
+    background-color: #266EA4;
+}
+
+.navbar-item {
+    color: white;
+}
+
+#aboutUsBTN {
+    position: absolute;
+    top: 350px; left: 875px;
+}
