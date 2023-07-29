@@ -1,10 +1,17 @@
-var userFlightNum = document.querySelector("#userFlightNum");
-var access_key = "2b641121c1c61422dffedb197e964e76";
+var accessKey = '624f684da3c94f04d45b71801a0fb7eb';
+var userNum = document.querySelector('#user_num');
+var submitNum = document.querySelector('#submit_num');
 
-function getFlightStatus() {
-    var apiUrl = `https://api.aviationstack.com/v1/flights?access_key=${access_key}`;
-    var flightsStatus = "";
+function getStatus(){
+    var flightNum = userNum.value;
     
+    fetch(`http://api.aviationstack.com/v1/flights?access_key=${accessKey}&limit=1flight_number=${flightNum}`)
+        .then(function (response) {
+            return response.json(); 
+        })
+        .then(function (data) {
+            console.log(data);
+        });
 }
 
-userFlightNum.addEventListener('submit', getFlightStatus);
+submitNum.addEventListener('click', getStatus);
