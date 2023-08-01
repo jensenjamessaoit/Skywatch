@@ -1,78 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <link rel="stylesheet" href="./style.css">
-    <title>Skywatch</title>
-</head>
-<body>
-    <header>
-        <nav class="navbar" role="navigation" aria-label="main navigation">
-              <title class="navbar-item"> Skywatch</title>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+        <link rel="stylesheet" href="./style.css">
+        <title>Skywatch</title>
+    </head>
+    <body>
+        <header>
+            <nav class="navbar" role="navigation" aria-label="main navigation">
+                <title class="navbar-item"> Skywatch</title>
 
-              <div class="navbar-start">
-                <a class="navbar-item">
-                  Home
-                </a>
-          
-                <a class="navbar-item">
-                  Weather 
-                </a>
+                <div class="navbar-start">
+                    <a class="navbar-item">
+                    Home
+                    </a>
+            
+                    <a class="navbar-item">
+                    Weather 
+                    </a>
 
-                <a class="navbar-item">
-                    Status
-                </a>
-                
-                <a class="navbar-item">
-                    Book
-                </a>
-                  </div>
-          </nav>
-    </header>
-    <main>
-        <div id="aboutUsSection">
-            <figure class="image is-3by1">
-                <img src="./images/pexels-pixabay-62623.jpg">
-              </figure>
-        </div>
-        <button class="button is-large" id="aboutUsBTN">About Us</button>
-    
-        <div id="weatherSection">
-            <h1 id="sectionHeaders">Weather</h1>
-            <div class="card"> 
-                <div class="card-content">
-                  <div class="content">
-                    we'll put the weather stuff here
-                  </div>
+                    <a class="navbar-item">
+                        Status
+                    </a>
+                    
+                    <a class="navbar-item">
+                        Book
+                    </a>
+                    </div>
+            </nav>
+        </header>
+        <main>
+            <div id="aboutUsSection">
+                <figure class="image is-3by1">
+                    <img src="./images/pexels-pixabay-62623.jpg">
+                </figure>
+            </div>
+            <button class="button is-large" id="aboutUsBTN">About Us</button>
+        
+            <div id="weatherSection">
+                <h1 id="sectionHeaders">Weather</h1>
+                <div class="card"> 
+                    <div class="card-content">
+                    <div class="content">
+                        we'll put the weather stuff here
+                    </div>
+                    </div>
+            </div>
+        
+            <div id="statusSection">
+                <h2>Status</h2>
+                <div>
+                    <input id="user_num" type="text" placeholder="Flight Number Here" > <button id="submit_num">submit</button> <p id='flight_status'></p>
                 </div>
-        </div>
-    
-        <div id="statusSection">
-            <h1 id="sectionHeaders">Status</h1>
-            <div class="card">
-                <div class="card-content">
-                  <div class="content">
-                    we'll put the status section in here
-                  </div>
+            </div>
+        
+            <div id="bookSection">
+                <h1 id="sectionHeaders">Book</h1>
+                <div class="card">
+                    <div class="card-content">
+                    <div class="content">
+                        we will put the booking section in here
+                    </div>
+                    </div>
                 </div>
-        </div>
-    
-        <div id="bookSection">
-            <h1 id="sectionHeaders">Book</h1>
-            <div class="card">
-                <div class="card-content">
-                  <div class="content">
-                    we will put the booking section in here
-                  </div>
-                </div>
-              </div>
-        </div>
-    </main>
-    
-    <footer>
-    
-    </footer>
-</body>
+            </div>
+        </main>
+        
+        <footer>
+        
+        </footer>
+        <script src="./scipt.js"></script>
+    </body>
 </html>
