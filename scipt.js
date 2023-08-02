@@ -1,23 +1,23 @@
-var accessKey = '624f684da3c94f04d45b71801a0fb7eb';
 var userNum = document.querySelector('#user_num');
 var submitNum = document.querySelector('#submit_num');
 var flightStatus = document.querySelector('#flight_status');
-
+const url = 'https://timetable-lookup.p.rapidapi.com/TimeTable/BOS/LAX/20230802/?Max_Results=1';
+const options = {
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': 'd4234982dfmsh11ff69add0c142cp1338dbjsnea33a2a2cc14',
+		'X-RapidAPI-Host': 'timetable-lookup.p.rapidapi.com'
+	}
+};
 
 function getStatus(){
-    var flightNum = userNum.value;
-    
-    fetch(`http://api.aviationstack.com/v1/flights?access_key=${accessKey}&flight_number=${flightNum}&limit=1`)
+    fetch(url, options)
         .then(function (response) {
-            return response.json();
+            return response.text();
         })
-        .then(function (data) {
+        .then(function(data){
             console.log(data);
-            console.log(data.data[0].flight_status);
-            flightStatus.textContent = data.data[0].flight_status;
-        });
-
-    userNum.value = '';
+        })
 }
 
 submitNum.addEventListener('click', getStatus);
