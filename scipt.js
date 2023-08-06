@@ -5,7 +5,7 @@ const flightUrl = 'https://flight-info-api.p.rapidapi.com/status?version=v2&Depa
 const options = {
 	method: 'GET',
 	headers: {
-		'X-RapidAPI-Key': '1bbfe2051emshd3a7305c98e25bcp10043cjsnb62d0e09b2cb',
+		'X-RapidAPI-Key': 'f13588d1e0msha430b5716237029p1cb182jsnf72e3eb54fb0',
 		'X-RapidAPI-Host': 'flight-info-api.p.rapidapi.com'
 	}
 };
@@ -16,6 +16,16 @@ var requestOptions = {
   headers: myHeaders,
   redirect: 'follow'
 };
+
+const weatherUrl = 'https://weatherapi-com.p.rapidapi.com/forecast.json?q=Paradise&days=3';
+const weatherOptions = {
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': 'c8dfe4389fmsh51b9d61de968458p15a458jsnb237461f7990',
+		'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com'
+	}
+};
+
 
 function getStatus(){  
     // var flightNum = 4988;
@@ -39,15 +49,20 @@ function getStatus(){
                     console.log(data.data[0].latitude.decimal);
                     console.log(data.data[0].longitude.decimal);
 
-                    fetch("")
+                    // The code below brings up the weather forecast using our weather api
+
+                    fetch(weatherUrl, weatherOptions)
+                        .then(function (response) {
+                             return response.json();
+                         })
+                         .then(function(data){
+                            console.log(data);
+                            console.log(data.forecast.forecastday);
+                            console.log(data.forecast.forecastday[0].day.condition);
+                            console.log(data.forecast.forecastday[0].day.avgtemp_f);
+                        })
                 })
         })
 }
 
 submitNum.addEventListener('click', getStatus);
-
-
-fetch("https://api.checkwx.com/station/KJFK,KLAX,KMIA", requestOptions)
-  .then(response => response.json())
-  .then(result => console.log(result))
-  .catch(error => console.log('error', error));
