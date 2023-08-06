@@ -1,7 +1,10 @@
-var userNum = document.querySelector('#user_num');
+var flightNum = document.querySelector('#user_num');
 var submitNum = document.querySelector('#submit_num');
 var flightStatus = document.querySelector('#flight_status');
-const flightUrl = 'https://flight-info-api.p.rapidapi.com/status?version=v2&DepartureDateTime=2023-07-04&ArrivalDateTime=2023-07-04&DepartureAirport=SLC&ArrivalAirport=LAS&CodeType=IATA';
+var arrivalTime = document.querySelector('#arrival_time');
+var departureTime = document.querySelector('#departure_time');
+const flightUrl = "https:flight-info-api.p.rapidapi.com/status?version=v2";
+
 const options = {
 	method: 'GET',
 	headers: {
@@ -9,6 +12,7 @@ const options = {
 		'X-RapidAPI-Host': 'flight-info-api.p.rapidapi.com'
 	}
 };
+
 var myHeaders = new Headers();
 myHeaders.append("X-API-Key", "c998af3eced9495b848340c0b4");
 var requestOptions = {
@@ -17,7 +21,6 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-const weatherUrl = 'https://weatherapi-com.p.rapidapi.com/forecast.json?q=Paradise&days=3';
 const weatherOptions = {
 	method: 'GET',
 	headers: {
@@ -28,30 +31,39 @@ const weatherOptions = {
 
 
 function getStatus(){  
-    // var flightNum = 4988;
 
-    fetch(flightUrl + "&FlightNumber = 4988", options)
+    var userArr = arrivalTime.value;
+    var userDep = departureTime.value;
+    var userNum = flightNum.value;
+console.log(flightUrl + "&DepartureDateTime=" + userDep + "&ArrivalDateTime=" + userArr + "&FlightNumber=" + userNum);
+//  This api gets the necessary flight information that we need.
+
+    fetch(flightUrl + "&DepartureDateTime=" + userDep + "&ArrivalDateTime=" + userArr + "&FlightNumber=" + userNum, options)
         .then(function (response) {
             return response.json();
         })
         .then(function(data){
-            // console.log(flightNum);
+
             console.log(data);
             console.log(data.data[0].arrival.airport.icao);
 
-            fetch("https://api.checkwx.com/station/KLAS?x-api-key=c998af3eced9495b848340c0b4")
+            // This api gets us the city, latitude, and longitude for the arrival airport
+
+            var flightIcao = data.data[0].arrival.airport.icao;
+
+            fetch("https://api.checkwx.com/station/" + flightIcao + "?x-api-key=c998af3eced9495b848340c0b4")
                 .then(function (response) {
                     return response.json();
                 })
                 .then(function(data){
                     console.log(data)
                     console.log(data.data[0].city);
-                    console.log(data.data[0].latitude.decimal);
-                    console.log(data.data[0].longitude.decimal);
 
-                    // The code below brings up the weather forecast using our weather api
+// The code below brings up the weather forecast using our weather api
 
-                    fetch(weatherUrl, weatherOptions)
+                    var arrivalCity = data.data[0].city;
+
+                    fetch("https://weatherapi-com.p.rapidapi.com/forecast.json?q=" + arrivalCity + "&days=1" + "&dt=" + userArr, weatherOptions)
                         .then(function (response) {
                              return response.json();
                          })
