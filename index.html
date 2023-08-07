@@ -3,6 +3,8 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;1,700&family=Dosis:wght@300&display=swap" rel="stylesheet">
+
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
         <link rel="stylesheet" href="./style.css">
         <title>Skywatch</title>
@@ -11,6 +13,32 @@
         <header>
             <nav class="navbar" role="navigation" aria-label="main navigation">
                 <title class="navbar-item"> Skywatch</title>
+            </nav>
+        </header>
+        <main>
+            <div id="logoSection">
+                <figure class="image is-128x128">
+                    <img src="./images/SkyWatchLogo.png">
+                </figure>
+            </div>
+        
+                <div id="inputSection">
+                    <label for="user_num">Flight Number</label>
+                    <input id="user_num" type="text" placeholder="ex. 1234" > 
+                    <label for="arr_port">Arrival Airport</label>
+                    <input id="arr_port" type="text" placeholder="(ex. LAX, SLC, MCO)" > 
+                    <label for="departure_time">Departure Date</label>
+                    <input id="departure_time" type="text" placeholder="(YYYY-MM-DD)" >
+                    <label for="arrival_time">Arrival Date</label>
+                    <input id="arrival_time" type="text" placeholder="(YYYY-MM-DD)" >
+                    <button id="submit_num">Submit</button> <p id='flight_status'></p>
+                </div>
+                <div id="info_container">
+                    <article>
+                        Status: <span id="status_info"></span>
+                    </article>
+                    <article class="weatherInfo">
+                        Weather: <span id="weather_info"></span>
 
                 <div class="navbar-start">
                     <a class="navbar-item">

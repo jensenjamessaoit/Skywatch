@@ -1,12 +1,36 @@
+* {
+    font-family: 'Comic Neue', cursive;
+    font-family: 'Dosis', sans-serif;
+}
 .navbar {
     background-color: #266EA4;
 }
 
 .navbar-item {
     color: white;
+    position: relative;
+    left: 900px;
+    font-size:xx-large;
 }
 
-#aboutUsBTN {
-    position: absolute;
-    top: 350px; left: 875px;
+#logoSection {
+    position: relative;
+    top: 25px; left: 900px;
+}
+#inputSection {
+    display:block;
+    position: relative;
+    top: 50px; left: 375px;
+    font-size: larger;
+    
+}
+
+#info_container {
+    position: relative;
+    top: 75px; left: 750px;
+}
+
+.weatherInfo {
+    position: relative;
+    top: -23px; left: 275px;
 }
