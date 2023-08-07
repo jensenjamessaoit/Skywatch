@@ -24,10 +24,6 @@
                     <a class="navbar-item">
                         Status
                     </a>
-                    
-                    <a class="navbar-item">
-                        Book
-                    </a>
                     </div>
             </nav>
         </header>
@@ -37,38 +33,26 @@
                     <img src="./images/pexels-pixabay-62623.jpg">
                 </figure>
             </div>
-            <button class="button is-large" id="aboutUsBTN">About Us</button>
-        
-            <div id="weatherSection">
-                <h1 id="sectionHeaders">Weather</h1>
-                <div class="card"> 
-                    <div class="card-content">
-                    <div class="content">
-                        we'll put the weather stuff here
-                    </div>
-                    </div>
-            </div>
         
             <div id="statusSection">
-                <h2>Status</h2>
+                <h2>Status & Weather</h2>
                 <div>
-                    <input id="user_num" type="text" placeholder="Flight Number Here" > 
-                    <input id="departure_time" type="text" placeholder="Departure Time Here" >
-                    <input id="arrival_time" type="text" placeholder="Arrival Time Here" >
+                    <input id="user_num" type="text" placeholder="Flight Number" > 
+                    <input id="arr_port" type="text" placeholder="Arrival Airport(ex. LAX, SLC, MCO)" > 
+                    <input id="departure_time" type="text" placeholder="Departure Date(YYYY-MM-DD)" >
+                    <input id="arrival_time" type="text" placeholder="Arrival Date(YYYY-MM-DD)" >
                     <button id="submit_num">submit</button> <p id='flight_status'></p>
+                </div>
+                <div id="info_container">
+                    <article>
+                        status: <span id="status_info"></span>
+                    </article>
+                    <article >
+                        weather: <span id="weather_info"></span>
+                    </article>
                 </div>
             </div>
         
-            <div id="bookSection">
-                <h1 id="sectionHeaders">Book</h1>
-                <div class="card">
-                    <div class="card-content">
-                    <div class="content">
-                        we will put the booking section in here
-                    </div>
-                    </div>
-                </div>
-            </div>
         </main>
         
         <footer>

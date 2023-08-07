@@ -1,14 +1,16 @@
 var flightNum = document.querySelector('#user_num');
+var arrPort = document.querySelector('#arr_port');
 var submitNum = document.querySelector('#submit_num');
 var flightStatus = document.querySelector('#flight_status');
 var arrivalTime = document.querySelector('#arrival_time');
 var departureTime = document.querySelector('#departure_time');
-const flightUrl = "https:flight-info-api.p.rapidapi.com/status?version=v2";
-
+var statusInfo = document.querySelector('#status_info');
+var weatherInfo = document.querySelector('#weather_info');
+const flightUrl = "https:flight-info-api.p.rapidapi.com/status?version=v2&CodeType=IATA";
 const options = {
 	method: 'GET',
 	headers: {
-		'X-RapidAPI-Key': 'f13588d1e0msha430b5716237029p1cb182jsnf72e3eb54fb0',
+		'X-RapidAPI-Key': 'c8dfe4389fmsh51b9d61de968458p15a458jsnb237461f7990',
 		'X-RapidAPI-Host': 'flight-info-api.p.rapidapi.com'
 	}
 };
@@ -31,21 +33,30 @@ const weatherOptions = {
 
 
 function getStatus(){  
-
+    var userNum = flightNum.value;
+    var userPort = arrPort.value;
     var userArr = arrivalTime.value;
     var userDep = departureTime.value;
-    var userNum = flightNum.value;
-console.log(flightUrl + "&DepartureDateTime=" + userDep + "&ArrivalDateTime=" + userArr + "&FlightNumber=" + userNum);
-//  This api gets the necessary flight information that we need.
+    
 
-    fetch(flightUrl + "&DepartureDateTime=" + userDep + "&ArrivalDateTime=" + userArr + "&FlightNumber=" + userNum, options)
+    console.log(flightUrl + "&DepartureDateTime=" + userDep + "&ArrivalDateTime=" + userArr + "&FlightNumber=" + userNum);
+    //  This api gets the necessary flight information that we need.
+
+    
+    fetch(flightUrl + "&ArrivalAirport=" + userPort + "&DepartureDateTime=" + userDep + "&ArrivalDateTime=" + userArr + "&FlightNumber=" + userNum, options)
         .then(function (response) {
             return response.json();
         })
         .then(function(data){
-
             console.log(data);
             console.log(data.data[0].arrival.airport.icao);
+
+            if(data.data[0].statusDetails.length === 0){
+                statusInfo.append('status currently not available');
+            }
+            else{
+                statusInfo.append(data.data[0].statusDetails[0].state);
+            }
 
             // This api gets us the city, latitude, and longitude for the arrival airport
 
@@ -62,16 +73,17 @@ console.log(flightUrl + "&DepartureDateTime=" + userDep + "&ArrivalDateTime=" + 
 // The code below brings up the weather forecast using our weather api
 
                     var arrivalCity = data.data[0].city;
-
+                    console.log("https://weatherapi-com.p.rapidapi.com/forecast.json?q=" + arrivalCity + "&days=1" + "&dt=" + userArr);
                     fetch("https://weatherapi-com.p.rapidapi.com/forecast.json?q=" + arrivalCity + "&days=1" + "&dt=" + userArr, weatherOptions)
                         .then(function (response) {
-                             return response.json();
+                            return response.json();
                          })
                          .then(function(data){
                             console.log(data);
                             console.log(data.forecast.forecastday);
                             console.log(data.forecast.forecastday[0].day.condition);
                             console.log(data.forecast.forecastday[0].day.avgtemp_f);
+                            weatherInfo.append(data.forecast.forecastday[0].day.condition.text);
                         })
                 })
         })
