@@ -10,7 +10,7 @@ const flightUrl = "https:flight-info-api.p.rapidapi.com/status?version=v2&CodeTy
 const options = {
 	method: 'GET',
 	headers: {
-		'X-RapidAPI-Key': 'c8dfe4389fmsh51b9d61de968458p15a458jsnb237461f7990',
+		'X-RapidAPI-Key': '05daa540ebmsh51caa232fe6a581p143266jsn15b3281524da',
 		'X-RapidAPI-Host': 'flight-info-api.p.rapidapi.com'
 	}
 };
