@@ -31,8 +31,19 @@ const weatherOptions = {
 	}
 };
 
+const CurWeatherUrl = 'https://weatherapi-com.p.rapidapi.com/current.json?q=Los%20Angeles';
+const CurWeatherOptions = {
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': 'd4234982dfmsh11ff69add0c142cp1338dbjsnea33a2a2cc14',
+		'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com'
+	}
+};
 
-function getStatus(){  
+function getStatus(){ 
+    var currentDay = false;
+    weatherInfo.innerHTML = "";
+    statusInfo.innerHTML = "";
     var userNum = flightNum.value;
     var userPort = arrPort.value;
     var userArr = arrivalTime.value;
@@ -52,41 +63,53 @@ function getStatus(){
             console.log(data.data[0].arrival.airport.icao);
 
             if(data.data[0].statusDetails.length === 0){
+                currentDay = false;
                 statusInfo.append('status currently not available');
             }
             else{
                 statusInfo.append(data.data[0].statusDetails[0].state);
+                currentDay = true;
             }
 
             // This api gets us the city, latitude, and longitude for the arrival airport
-
             var flightIcao = data.data[0].arrival.airport.icao;
-
+            
             fetch("https://api.checkwx.com/station/" + flightIcao + "?x-api-key=c998af3eced9495b848340c0b4")
                 .then(function (response) {
                     return response.json();
                 })
-                .then(function(data){
+                .then(function(data) {
                     console.log(data)
                     console.log(data.data[0].city);
 
-// The code below brings up the weather forecast using our weather api
-
+                    // The code below brings up the weather forecast using our weather api
                     var arrivalCity = data.data[0].city;
-                    console.log("https://weatherapi-com.p.rapidapi.com/forecast.json?q=" + arrivalCity + "&days=1" + "&dt=" + userArr);
-                    fetch("https://weatherapi-com.p.rapidapi.com/forecast.json?q=" + arrivalCity + "&days=1" + "&dt=" + userArr, weatherOptions)
-                        .then(function (response) {
-                            return response.json();
-                         })
-                         .then(function(data){
-                            console.log(data);
-                            console.log(data.forecast.forecastday);
-                            console.log(data.forecast.forecastday[0].day.condition);
-                            console.log(data.forecast.forecastday[0].day.avgtemp_f);
-                            weatherInfo.append(data.forecast.forecastday[0].day.condition.text);
-                        })
+                    if(currentDay = false){
+                        fetch("https://weatherapi-com.p.rapidapi.com/forecast.json?q=" + arrivalCity + "&days=1" + "&dt=" + userArr, weatherOptions)
+                            .then(function (response) {
+                                return response.json();
+                                })
+                                .then(function(data){
+                                console.log(data);
+                                weatherInfo.append(data.forecast.forecastday[0].day.condition.text);
+                            })
+                    }
+                    else {
+                        fetch(CurWeatherUrl,CurWeatherOptions)
+                            .then(function(response){
+                                return response.json();
+                            })
+                            .then(function(data){
+                                console.log(data);
+                                weatherInfo.append(data.current.condition.text);
+                            })
+                    }
                 })
         })
+    flightNum.value = "";
+    arrPort.value = "";
+    arrivalTime.value = "";
+    departureTime.value = "";
 }
 
 submitNum.addEventListener('click', getStatus);
