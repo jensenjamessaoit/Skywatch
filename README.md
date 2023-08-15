@@ -24,3 +24,5 @@ Skywatch is a website where you'll be able to check flight status and the weathe
 * Have a polished UI.
 * Have a clean repository that meets quality coding standards (file structure, naming conventions, follows best practices for class/id-naming conventions, indentation, quality comments, etc.).
 * Have a quality README (with unique name, description, technologies used, screenshot, and link to deployed application).
+
+Webpage: ![Screenshot](<images/Screenshot 2023-08-14 213733.png>)
